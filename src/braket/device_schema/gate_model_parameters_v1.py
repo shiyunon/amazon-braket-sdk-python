@@ -11,6 +11,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+
+from typing import Dict
 from pydantic import Field, conint
 
 from braket.schema_common import BraketSchemaBase, BraketSchemaHeader
@@ -45,3 +47,4 @@ class GateModelParameters(BraketSchemaBase):
     braketSchemaHeader: BraketSchemaHeader = Field(default=_PROGRAM_HEADER, const=_PROGRAM_HEADER)
     qubitCount: conint(strict=True, ge=0)
     disableQubitRewiring: bool = False
+    gateLengthParameter: Dict[str, str]

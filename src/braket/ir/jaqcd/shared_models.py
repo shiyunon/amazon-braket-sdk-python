@@ -13,8 +13,14 @@
 
 from typing import Optional, Union
 
-from pydantic import BaseModel, confloat, conint, conlist, constr
+from pydantic import BaseModel, confloat, conint, conlist, constr, validator
 
+class AllQubits(BaseModel):
+    """
+    All qubits operations.
+    """
+
+    pass
 
 class SingleTarget(BaseModel):
     """
@@ -198,3 +204,4 @@ class MultiState(BaseModel):
     """
 
     states: conlist(constr(regex="^[01]+$", min_length=1), min_items=1)
+

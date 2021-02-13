@@ -79,3 +79,4 @@ class JaqcdDeviceActionProperties(DeviceActionProperties):
     supportedOperations: List[str]
     supportedResultTypes: Optional[List[ResultType]]
     disabledQubitRewiringSupported: Optional[bool] = None
+    gateLengthParameterSupported: Optional[bool] = None

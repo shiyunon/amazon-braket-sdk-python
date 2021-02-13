@@ -48,6 +48,8 @@ from braket.ir.jaqcd.instructions import (
     X,
     Y,
     Z,
+    PreservedRegionStart,
+    PreservedRegionEnd
 )
 from braket.ir.jaqcd.results import (
     Amplitude,
@@ -57,6 +59,9 @@ from braket.ir.jaqcd.results import (
     StateVector,
     Variance,
 )
+
+from braket.ir.jaqcd.program_meta import GlobalOptions
+
 from braket.schema_common import BraketSchemaBase, BraketSchemaHeader
 
 """
@@ -64,6 +69,8 @@ We need a constant lookup for our pydantic validator. Using a plain Union[] will
 in an O(n) lookup for arbitrary payloads, having a negative impact on model parsing times.
 """
 _valid_gates = {
+    PreservedRegionStart.Type.preserved_region_start: PreservedRegionStart,
+    PreservedRegionEnd.Type.preserved_region_end: PreservedRegionEnd,
     CCNot.Type.ccnot: CCNot,
     CNot.Type.cnot: CNot,
     CPhaseShift.Type.cphaseshift: CPhaseShift,
@@ -161,6 +168,7 @@ class Program(BraketSchemaBase):
 
     _PROGRAM_HEADER = BraketSchemaHeader(name="braket.ir.jaqcd.program", version="1")
     braketSchemaHeader: BraketSchemaHeader = Field(default=_PROGRAM_HEADER, const=_PROGRAM_HEADER)
+    globalOptions: GlobalOptions
     instructions: List[Any]
     results: Optional[List[Results]]
     basis_rotation_instructions: Optional[List[Any]]

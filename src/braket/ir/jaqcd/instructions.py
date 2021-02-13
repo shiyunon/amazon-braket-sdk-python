@@ -14,6 +14,7 @@
 from enum import Enum
 
 from braket.ir.jaqcd.shared_models import (
+    AllQubits,
     Angle,
     DoubleControl,
     DoubleTarget,
@@ -41,6 +42,17 @@ To add a new instruction:
     - Write up docstrings to define the instruction, properties, and examples.
 """
 
+class PreservedRegionStart(AllQubits):
+    class Type(str, Enum):
+        preserved_region_start = "preserved_region_start"
+
+    type = Type.preserved_region_start
+
+class PreservedRegionEnd(AllQubits):
+    class Type(str, Enum):
+        preserved_region_end = "preserved_region_end"
+
+    type = Type.preserved_region_end
 
 class H(SingleTarget):
     """
